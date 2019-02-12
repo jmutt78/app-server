@@ -5,7 +5,7 @@ mongoose.Promise = global.Promise;
 
 const ideaSchema = mongoose.Schema({
   idea: { type: String },
-  description: { description: String },
+  description: { type: String },
   questions: {
     question1: { type: String },
     question2: { type: String },
