@@ -14,6 +14,7 @@ const questionSchema = mongoose.Schema({
 
 const ideaSchema = mongoose.Schema({
   idea: { type: String },
+  userId: { type: String },
   description: { type: String },
   questions: [questionSchema]
 });
@@ -21,6 +22,7 @@ const ideaSchema = mongoose.Schema({
 ideaSchema.methods.serialize = function() {
   return {
     id: this._id,
+    userId: this.userId,
     idea: this.idea,
     description: this.description,
     questions: this.questions

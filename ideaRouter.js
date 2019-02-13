@@ -31,6 +31,7 @@ router.get("/:id", jwtAuth, (req, res) => {
 });
 
 router.post("/", jwtAuth, (req, res) => {
+  const username = req.user.username;
   const requiredFields = ["idea", "description"];
   for (let i = 0; i < requiredFields.length; i++) {
     const field = requiredFields[i];
@@ -42,16 +43,10 @@ router.post("/", jwtAuth, (req, res) => {
   }
 
   Idea.create({
+    userId: username,
     idea: req.body.idea,
     description: req.body.description,
-    questions: {
-      question1: req.body.question1,
-      question2: req.body.question2,
-      question3: req.body.question3,
-      question4: req.body.question4,
-      question5: req.body.question5,
-      question6: req.body.question6
-    }
+    questions: req.body.questions
   })
     .then(daily => res.status(201).json(daily.serialize()))
     .catch(err => {
