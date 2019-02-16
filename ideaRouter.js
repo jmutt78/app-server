@@ -5,11 +5,9 @@ const { Idea } = require("./models");
 const jwtAuth = passport.authenticate("jwt", { session: false });
 
 router.get("/", jwtAuth, (req, res) => {
-  let created = req.query.created;
+  let username = req.user.username;
   let findParam = {};
-  if (created != null) {
-    findParam.created = created;
-  }
+  findParam.userId = username;
 
   Idea.find(findParam)
     .then(posts => {
